@@ -1,13 +1,13 @@
 
 import { getHttpEndpoint } from "@orbs-network/ton-access";
 import { mnemonicToWalletKey } from "@ton/crypto";
-import { TonClient, WalletContractV4, internal } from "@ton/ton";
+import { TonClient, WalletContractV4, WalletContractV3R2, internal } from "@ton/ton";
 
 async function main() {
   // open wallet v4 (notice the correct wallet version here)
   const mnemonic = "craft one glory creek surround social split donor orchard obscure emerge often cherry attend frequent split torch brother undo leg staff tip vague cattle"; // your 24 secret words (replace ... with the rest of the words)
   const key = await mnemonicToWalletKey(mnemonic.split(" "));
-  const wallet = WalletContractV4.create({ publicKey: key.publicKey, workchain: 0 });
+  const wallet = /* WalletContractV4 */ WalletContractV3R2.create({ publicKey: key.publicKey, workchain: 0 });
 
   // initialize ton rpc client on testnet
   const endpoint = await getHttpEndpoint({ network: "testnet" });
